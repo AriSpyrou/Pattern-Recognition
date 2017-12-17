@@ -1,7 +1,10 @@
 import pandas
 import numpy
 
-#for Theta in range (a,b,c): gia thn ektimhsh omadwn
+Theta_min = dmin + 0.25*(dmax - dmin)
+Theta_max = dmin + 0.75*(dmax - dmin)
+Theta_step = 3
+#for Theta in range (Theta_min, Theta_max, Theta_step):
     m = 1 #number of clusters
     N = 5 #number of vectors to cluster
     q = 100 #maximum number of clusters
@@ -24,7 +27,6 @@ import numpy
             m = m + 1
             mC[m].append(x[i]) #always set as representative of a new cluster the vector that triggered its creation
             C[m].append(x[i])
-
         else:
             C[k].append(x[i])
 
