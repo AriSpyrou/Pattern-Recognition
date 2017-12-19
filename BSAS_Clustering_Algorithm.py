@@ -18,15 +18,15 @@ s = 0 #number of repetitions for the algorithm
 
 for Theta in range (Theta_min, Theta_max, Theta_step):
     s = s + 1
-    C[1].append(x[1]) #initialization of cluster 1 with the first vector
-    mC[1].append(x[1]) #initialization of cluster 1 representative
+    C[0].append(x[1]) #initialization of cluster 1 with the first vector
+    mC[0].append(x[1]) #initialization of cluster 1 representative
 
     #cluster the rest of the vectors
-    for i in range (2,N):
-        distance_min = numpy.linalg.norm(mC[1]-x[i]) #set as min the distance from the first cluster
+    for i in range (1,N):
+        distance_min = numpy.linalg.norm(mC[0]-x[i]) #set as min the distance from the first cluster
         index_min = 1 #number of the selected cluster
-        for k in range(2,m):
-            distance = numpy.linalg.norm(mC[m]-x[i]) #distance between all clusters and vector
+        for k in range(1,m):
+            distance = numpy.linalg.norm(mC[k]-x[i]) #distance between all clusters and vector
             if (distance_min > distance):
                 distance_min = distance #keep the min
                 index_min = k #number of the selected cluster
@@ -36,8 +36,8 @@ for Theta in range (Theta_min, Theta_max, Theta_step):
             mC[m].append(x[i]) #always set as representative of a new cluster the vector that triggered its creation
             C[m].append(x[i]) #add vector to cluster
         else:
-            C[index_min].append(x[i]) #add vector to cluster
-    result[s] = m #add number of clusters for the current repetition
+            C.append(x[i]) #add vector to cluster
+    result.append(m) #add number of clusters for the current repetition
 
 
 
