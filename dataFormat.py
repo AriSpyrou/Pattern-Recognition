@@ -57,3 +57,14 @@ matrix = np.array(matrix)
 np.savetxt("data\data2N.csv", matrix, delimiter=",", fmt='%.5f')
 '''
 
+data = np.genfromtxt('data/data2N.csv', delimiter=',')
+matrix = []
+for row in data:
+    cnt = 0
+    for col in row:
+        cnt += col
+    cnt += -1
+    matrix.append(cnt)
+matrix = np.array(matrix)
+np.savetxt("data\data2NADD.csv", matrix, delimiter=",", fmt='%.6f')
+
