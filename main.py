@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-data = np.genfromtxt('data/data2N.csv', delimiter=',')
+data = np.genfromtxt('data/data1N.csv', delimiter=',')
 np.random.shuffle(data)
 N = data.shape[0]  # number of vectors to cluster
 mC = []  # list of vectors that represent the whole cluster
@@ -12,9 +12,9 @@ result = []  # list of different number of cluster
 # dmin + 0.25*(dmax - dmin) used initially to approxiamate
 # dmin + 0.75*(dmax - dmin) used initially to approxiamate
 
-Theta_min = 0.15
-Theta_max = 0.4
-Theta_step = 0.00025
+Theta_min = 10
+Theta_max = 15.05
+Theta_step = 0.01
 Theta_Range = np.arange(Theta_min, Theta_max, Theta_step)
 
 for Theta in Theta_Range:
@@ -26,15 +26,17 @@ for Theta in Theta_Range:
     # cluster the rest of the vectors
     for i in range(1, N):
         distance_min = np.linalg.norm(mC[0]-data[i])  # set as min the distance from the first cluster
+        index_min = 0
         for k in range(1, m):
             distance = np.linalg.norm(mC[k]-data[i])  # distance between all clusters and vector
             if distance_min > distance:
                 distance_min = distance  # keep the min
+                index_min = k
 
         if distance_min > Theta:  # if vectors min distance is less than the theta create a new cluster
             m = m + 1
             mC.append(data[i])  # always set as representative of a new cluster the vector that triggered its creation
     result.append(m)  # add number of clusters for the current repetition
 output = np.column_stack((Theta_Range, result))
-np.savetxt("data\dump\dump3a.csv", output, delimiter=",", fmt='%.5f')
+np.savetxt("data\dump\dump1.csv", output, delimiter=",", fmt='%.2f')
 #  raw_input('press any key')

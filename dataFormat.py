@@ -57,6 +57,7 @@ matrix = np.array(matrix)
 np.savetxt("data\data2N.csv", matrix, delimiter=",", fmt='%.5f')
 '''
 
+'''
 data = np.genfromtxt('data/data2N.csv', delimiter=',')
 matrix = []
 for row in data:
@@ -66,5 +67,14 @@ for row in data:
     cnt += -1
     matrix.append(cnt)
 matrix = np.array(matrix)
-np.savetxt("data\data2NADD.csv", matrix, delimiter=",", fmt='%.6f')
+np.savetxt("data\data2NADD.csv", matrix, delimiter=",", fmt='%.5f')
+'''
 
+data = np.genfromtxt('data/data5.csv', delimiter=',')
+max = 0
+max_id = 193
+cnt = 0
+for row in data:
+    for d in row[1:]:
+        if max_id == d:
+            max = cnt

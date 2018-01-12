@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 '''
 data = np.genfromtxt('data/dataN.csv', delimiter=',').astype(int)
@@ -30,6 +29,3 @@ for row in data:
             distance_min = distance
         elif distance > distance_max:
             distance_max = distance
-
-print distance_max
-print distance_min
