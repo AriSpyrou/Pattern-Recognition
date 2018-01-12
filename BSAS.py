@@ -26,12 +26,10 @@ for Theta in Theta_Range:
     # cluster the rest of the vectors
     for i in range(1, N):
         distance_min = np.linalg.norm(mC[0]-data[i])  # set as min the distance from the first cluster
-        index_min = 0
         for k in range(1, m):
             distance = np.linalg.norm(mC[k]-data[i])  # distance between all clusters and vector
             if distance_min > distance:
                 distance_min = distance  # keep the min
-                index_min = k
 
         if distance_min > Theta:  # if vectors min distance is less than the theta create a new cluster
             m = m + 1
