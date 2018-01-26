@@ -70,6 +70,7 @@ matrix = np.array(matrix)
 np.savetxt("data\data2NADD.csv", matrix, delimiter=",", fmt='%.5f')
 '''
 
+'''
 data = np.genfromtxt('data/data5.csv', delimiter=',')
 max = 0
 max_id = 193
@@ -78,3 +79,12 @@ for row in data:
     for d in row[1:]:
         if max_id == d:
             max = cnt
+'''
+
+
+data = np.genfromtxt('data/u5.test', delimiter='\t')
+res = [[0 for i in range(1682)] for j in range(943)]
+for row in data:
+    res[int(row[0])-1][int(row[1])-1] = 1
+res = np.array(res).astype(int)
+np.savetxt("data/5fold/u5.test", res, delimiter=",", fmt='%d')
