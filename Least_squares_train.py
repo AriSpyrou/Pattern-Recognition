@@ -1,9 +1,9 @@
 import numpy as np
 import scipy.optimize
 
-movie_id = 50  # Movie identifier bare in mind that if movie_id>841 then offset should be set to 1
-fold_number = 2  # Which fold we're using to test; should be the same we used to train
-offset = 0  # See movie_id
+movie_id = 1000  # Movie identifier bare in mind that if movie_id>841 then offset should be set to 1
+fold_number = 5  # Which fold we're using to test; should be the same we used to train
+offset = 1  # See movie_id
 
 # Initialize matrices
 data = np.genfromtxt('data/5fold/u'+str(fold_number)+'.base', delimiter=',').astype(int)
