@@ -1,9 +1,12 @@
 import numpy as np
 import scipy.optimize
 
-movie_id = 1000  # Movie identifier bare in mind that if movie_id>841 then offset should be set to 1
-fold_number = 5  # Which fold we're using to test; should be the same we used to train
-offset = 1  # See movie_id
+movie_id = 0  # Movie identifier
+fold_number = 2  # Which fold we're using to test; should be the same we used to train
+if movie_id > 841:
+    offset = 1
+else:
+    offset = 0
 
 # Initialize matrices
 data = np.genfromtxt('data/5fold/u'+str(fold_number)+'.base', delimiter=',').astype(int)
@@ -19,7 +22,7 @@ def get_error(params, X, Y):  # Error function
     return Y - np.dot(X, params)
 
 
-# Create X, Y matrix
+# Create X, Y matrices
 for i in range(data.shape[0]-1):
     X.append(data[i])
     X[i] = np.append(X[i], 1)

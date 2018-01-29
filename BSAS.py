@@ -1,40 +1,38 @@
 import numpy as np
-import math
+import time
 
-data = np.genfromtxt('data/data1N.csv', delimiter=',')
-np.random.shuffle(data)
-N = data.shape[0]  # number of vectors to cluster
-mC = []  # list of vectors that represent the whole cluster
-result = []  # list of different number of cluster
+start_time = time.time()
 
-# dmin = 0
-# dmax = math.sqrt(10)
-# dmin + 0.25*(dmax - dmin) used initially to approxiamate
-# dmin + 0.75*(dmax - dmin) used initially to approxiamate
+data = np.genfromtxt('data/data1N.csv', delimiter=',')  # Initialize array with data
+np.random.shuffle(data)  # Shuffle data
+N = data.shape[0]  # Number of vectors to cluster
+mC = []  # List of representative vectors
+result = []  # List of number of clusters per iteration
 
 Theta_min = 10
 Theta_max = 15.05
-Theta_step = 0.01
+Theta_step = 1
 Theta_Range = np.arange(Theta_min, Theta_max, Theta_step)
 
 for Theta in Theta_Range:
-    # np.random.shuffle(data)
-    m = 1  # number of clusters
-    mC[:] = []
-    mC.append(data[0])  # initialization of cluster 1 with the first vector
+    m = 1  # Number of clusters
+    mC[:] = []  # Init/clear mC list
+    mC.append(data[0])  # Initialization of cluster 1 with the first vector
 
-    # cluster the rest of the vectors
+    # Cluster the rest of the vectors
     for i in range(1, N):
-        distance_min = np.linalg.norm(mC[0]-data[i])  # set as min the distance from the first cluster
+        distance_min = np.linalg.norm(mC[0]-data[i])  # Find minimum distance between vector and cluster
         for k in range(1, m):
-            distance = np.linalg.norm(mC[k]-data[i])  # distance between all clusters and vector
+            distance = np.linalg.norm(mC[k]-data[i])
             if distance_min > distance:
-                distance_min = distance  # keep the min
+                distance_min = distance
 
-        if distance_min > Theta:  # if vectors min distance is less than the theta create a new cluster
-            m = m + 1
-            mC.append(data[i])  # always set as representative of a new cluster the vector that triggered its creation
-    result.append(m)  # add number of clusters for the current repetition
+        if distance_min > Theta:  # If minimum distance is less than the threshold
+            m = m + 1  # Create new cluster
+            mC.append(data[i])  # Set the vector as the representative of the new cluster
+    result.append(m)  # Add number of clusters for the current iteration
+
+print("--- %s s ---" % (time.time() - start_time))
+
 output = np.column_stack((Theta_Range, result))
 np.savetxt("data\dump\dump1.csv", output, delimiter=",", fmt='%.2f')
-#  raw_input('press any key')

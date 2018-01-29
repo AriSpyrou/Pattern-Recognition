@@ -1,6 +1,9 @@
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, linkage
 import numpy as np
+import time
+
+start_time = time.time()
 
 data = np.genfromtxt('data/data1N.csv', delimiter=',')
 Z = linkage(data, method='median', metric='euclidean')
@@ -16,4 +19,7 @@ dendrogram(
     truncate_mode='lastp',
     p=100
 )
+
+print("--- %s s ---" % (time.time() - start_time))
+
 plt.show()

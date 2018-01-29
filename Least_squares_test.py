@@ -1,8 +1,11 @@
 import numpy as np
 
-movie_id = 1000  # Movie identifier bare in mind that if movie_id>841 then offset should be set to 1
+movie_id = 0  # Movie identifier
 fold_number = 2  # Which fold we're using to test; should be the same we used to train
-offset = 1  # See movie_id
+if movie_id > 841:
+    offset = 1
+else:
+    offset = 0
 
 # Initialize matrices
 data = np.genfromtxt('data/5fold/u'+str(fold_number)+'.test', delimiter=',').astype(int)
@@ -56,7 +59,7 @@ print('Recall: '+str((TP/(TP+FN))*100)+'%')
 print('False Alarm: '+str((FP/(TN+FP))*100)+'%')
 print('Specificity: '+str((TN/(TN+FP))*100)+'%')
 print('Precision: '+str((TP/(TP+FP))*100)+'%')
-print('F-measure: '+str((2*(TP/(TP+FP))*(TP/(TP+FN)))/((TP/(TP+FP))+(TP/(TP+FN))))+'%'+'\n')  # Harmonic mean of precision and recall
+print('F-measure: '+str(((2*(TP/(TP+FP))*(TP/(TP+FN)))/((TP/(TP+FP))+(TP/(TP+FN))))*100)+'%'+'\n')  # Harmonic mean of precision and recall
 
 # Takes input from the keyboard and predicts whether or not
 # the user with matching user_id has watched the movie (movie_id)
