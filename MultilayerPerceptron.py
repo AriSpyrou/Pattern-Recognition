@@ -7,8 +7,7 @@ import time
 
 start_time = time.time()  # Time the execution
 
-movie_id = 50  # Movie identifier bare in mind that if movie_id>841 then offset should be set to 1
-offset = 0  # See movie_id
+movie_id = 0  # Movie identifier
 
 # Initialize matrices
 data = np.genfromtxt('data/data1N.csv', delimiter=',').astype(int)
@@ -19,7 +18,7 @@ Y = []
 for i in range(data.shape[0]-1):
     X.append(data[i])
     X[i] = np.append(X[i], 1)
-    if X[i][movie_id-offset*841] == 1:
+    if X[i][movie_id] == 1:
         Y.append(1)
     else:
         Y.append(-1)

@@ -1,7 +1,11 @@
 import numpy as np
+import time
+
+start_time = time.time()  # Time the execution
 
 movie_id = 0  # Movie identifier
 fold_number = 2  # Which fold we're using to test; should be the same we used to train
+
 if movie_id > 841:
     offset = 1
 else:
@@ -38,7 +42,6 @@ TP = 0.0
 FP = 0.0
 TN = 0.0
 FN = 0.0
-N = x0.shape[0]
 for i in range(X.shape[0]-1):
     predicted = 0
     for j in range(X.shape[1]-1):
@@ -48,11 +51,13 @@ for i in range(X.shape[0]-1):
             TP += 1  # True Positive result i.e predicted and true both agree user watched movie
         else:
             FP += 1  # False Positive result i.e predicted is user watched the movie but truth is he didn't
-    elif predicted < 0:
+    elif predicted <= 0:
         if Y[i] < 0:
             TN += 1  # True Negative result i.e predicted and true both agree user didn't watch movie
         else:
             FN += 1  # False Negative result i.e predicted is user didn't watch movie but truth is he did
+
+N = TP + FP + TN + FN
 
 print('Accuracy: '+str(((TP+TN)/N)*100)+'%')
 print('Recall: '+str((TP/(TP+FN))*100)+'%')
@@ -60,6 +65,8 @@ print('False Alarm: '+str((FP/(TN+FP))*100)+'%')
 print('Specificity: '+str((TN/(TN+FP))*100)+'%')
 print('Precision: '+str((TP/(TP+FP))*100)+'%')
 print('F-measure: '+str(((2*(TP/(TP+FP))*(TP/(TP+FN)))/((TP/(TP+FP))+(TP/(TP+FN))))*100)+'%'+'\n')  # Harmonic mean of precision and recall
+
+print("--- %s s ---" % (time.time() - start_time))
 
 # Takes input from the keyboard and predicts whether or not
 # the user with matching user_id has watched the movie (movie_id)

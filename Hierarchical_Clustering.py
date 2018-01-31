@@ -14,8 +14,8 @@ plt.xlabel('sample index')
 plt.ylabel('distance')
 dendrogram(
     Z,
-    leaf_rotation=90,  # rotates the x axis labels
-    leaf_font_size=10,  # font size for the x axis labels
+    leaf_rotation=90,  # rotates the labels on x axis
+    leaf_font_size=10,  # font size of the x axis labels
     truncate_mode='lastp',
     p=100
 )

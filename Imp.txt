@@ -6,4 +6,7 @@
 6) dmax, dmin me script
 ---
 7) Enas opoiosdipote xristis exei kata meso oro perissoteres koines tainies me tin omada tou para opoiadhpote allh omada
+
 8) Liga dedomena gia tainia = gtp
+9) Leastsq meriki pliroforia gia olous tous xristes + taksinomisi meta
+10) MLP exei olh tin pliroforia per xristi kai taksinomei xristes gia tous opoious den eixe pliroforia
